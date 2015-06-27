@@ -84,8 +84,8 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
-# CMHW
-BOARD_HARDWARE_CLASS += $(VENDOR_PATH)/cmhw/src
+# MKHW
+BOARD_HARDWARE_CLASS += $(VENDOR_PATH)/mkhw/src
 
 # malloc implementation
 MALLOC_IMPL := dlmalloc
