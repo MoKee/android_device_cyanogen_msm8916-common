@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (C) 2015 The MoKee OpenSource Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,30 @@
  * limitations under the License.
  */
 
-package org.cyanogenmod.hardware;
+package org.mokee.hardware;
 
-import org.cyanogenmod.hardware.util.FileUtils;
+import org.mokee.hardware.util.FileUtils;
 
 import android.util.Log;
 
 import java.io.File;
 
 /**
- * Auto Contrast Optimization
+ * Facemelt mode!
  */
-public class AutoContrast {
+public class SunlightEnhancement {
 
-    private static final String TAG = "AutoContrast";
+    private static final String TAG = "SunlightEnhancement";
 
-    private static final String FILE_ACO = "/sys/class/graphics/fb0/aco";
+    private static final String FILE_SRE = "/sys/class/graphics/fb0/sre";
 
     /**
-     * Whether device supports ACO
+     * Whether device supports SRE
      *
      * @return boolean Supported devices must return always true
      */
     public static boolean isSupported() {
-        File f = new File(FILE_ACO);
+        File f = new File(FILE_SRE);
 
         if(f.exists()) {
             return true;
@@ -47,14 +47,14 @@ public class AutoContrast {
     }
 
     /**
-     * This method return the current activation status of ACO
+     * This method return the current activation status of SRE
      *
-     * @return boolean Must be false when ACO is not supported or not activated, or
+     * @return boolean Must be false when SRE is not supported or not activated, or
      * the operation failed while reading the status; true in any other case.
      */
     public static boolean isEnabled() {
         try {
-            return Integer.parseInt(FileUtils.readOneLine(FILE_ACO)) > 0;
+            return Integer.parseInt(FileUtils.readOneLine(FILE_SRE)) > 0;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
@@ -62,14 +62,14 @@ public class AutoContrast {
     }
 
     /**
-     * This method allows to setup ACO
+     * This method allows to setup SRE
      *
-     * @param status The new ACO status
-     * @return boolean Must be false if ACO is not supported or the operation
+     * @param status The new SRE status
+     * @return boolean Must be false if SRE is not supported or the operation
      * failed; true in any other case.
      */
     public static boolean setEnabled(boolean status) {
-        return FileUtils.writeLine(FILE_ACO, status ? "1" : "0");
+        return FileUtils.writeLine(FILE_SRE, status ? "2" : "0");
     }
 
     /**

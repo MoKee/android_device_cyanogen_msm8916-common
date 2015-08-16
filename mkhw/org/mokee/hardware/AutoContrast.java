@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The CyanogenMod Project
+ * Copyright (C) 2015 The MoKee OpenSource Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,31 +14,30 @@
  * limitations under the License.
  */
 
-package org.cyanogenmod.hardware;
+package org.mokee.hardware;
 
-import org.cyanogenmod.hardware.util.FileUtils;
+import org.mokee.hardware.util.FileUtils;
 
 import android.util.Log;
 
 import java.io.File;
 
 /**
- * Adaptive backlight support (this refers to technologies like NVIDIA SmartDimmer,
- * QCOM CABL or Samsung CABC).
+ * Auto Contrast Optimization
  */
-public class AdaptiveBacklight {
+public class AutoContrast {
 
-    private static final String TAG = "AdaptiveBacklight";
+    private static final String TAG = "AutoContrast";
 
-    private static final String FILE_CABC = "/sys/class/graphics/fb0/cabc";
+    private static final String FILE_ACO = "/sys/class/graphics/fb0/aco";
 
     /**
-     * Whether device supports an adaptive backlight technology.
+     * Whether device supports ACO
      *
      * @return boolean Supported devices must return always true
      */
     public static boolean isSupported() {
-        final File f = new File(FILE_CABC);
+        File f = new File(FILE_ACO);
 
         if(f.exists()) {
             return true;
@@ -48,14 +47,14 @@ public class AdaptiveBacklight {
     }
 
     /**
-     * This method return the current activation status of the adaptive backlight technology.
+     * This method return the current activation status of ACO
      *
-     * @return boolean Must be false when adaptive backlight is not supported or not activated, or
+     * @return boolean Must be false when ACO is not supported or not activated, or
      * the operation failed while reading the status; true in any other case.
      */
     public static boolean isEnabled() {
         try {
-            return Integer.parseInt(FileUtils.readOneLine(FILE_CABC)) > 0;
+            return Integer.parseInt(FileUtils.readOneLine(FILE_ACO)) > 0;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
@@ -63,13 +62,22 @@ public class AdaptiveBacklight {
     }
 
     /**
-     * This method allows to setup adaptive backlight technology status.
+     * This method allows to setup ACO
      *
-     * @param status The new adaptive backlight status
-     * @return boolean Must be false if adaptive backlight is not supported or the operation
+     * @param status The new ACO status
+     * @return boolean Must be false if ACO is not supported or the operation
      * failed; true in any other case.
      */
     public static boolean setEnabled(boolean status) {
-        return FileUtils.writeLine(FILE_CABC, status ? "1" : "0");
+        return FileUtils.writeLine(FILE_ACO, status ? "1" : "0");
+    }
+
+    /**
+     * Whether adaptive backlight (CABL / CABC) is required to be enabled
+     *
+     * @return boolean False if adaptive backlight is not a dependency
+     */
+    public static boolean isAdaptiveBacklightRequired() {
+        return false;
     }
 }
