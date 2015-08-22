@@ -72,7 +72,7 @@ TARGET_USES_UNCOMPRESSED_KERNEL := true
 endif
 TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8916
 ifneq ($(TARGET_BUILD_VARIANT),user)
-TARGET_KERNEL_ADDITIONAL_CONFIG := cyanogenmod_debug_config
+TARGET_KERNEL_ADDITIONAL_CONFIG := mokee_debug_config
 endif
 
 # ANT+
