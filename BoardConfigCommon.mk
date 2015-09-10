@@ -89,7 +89,8 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
 # MKHW
-BOARD_HARDWARE_CLASS += $(VENDOR_PATH)/mkhw/src
+BOARD_USES_MOKEE_HARDWARE := true
+BOARD_HARDWARE_CLASS += hardware/mokee/mkhw
 
 # malloc implementation
 MALLOC_IMPL := dlmalloc
