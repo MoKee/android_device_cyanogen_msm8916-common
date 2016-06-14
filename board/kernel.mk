@@ -7,6 +7,8 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 
+ENABLE_CPUSETS := true
+
 ifneq ($(filter lettuce tomato,$(TARGET_DEVICE)),)
 TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8916-lettuce
 else
