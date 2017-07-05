@@ -6,10 +6,6 @@ on enable-low-power
     # RPS mask
     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 10
 
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 81250
-
     # HMP scheduler load tracking settings
     write /proc/sys/kernel/sched_window_stats_policy 3
     write /proc/sys/kernel/sched_ravg_hist_size 5
@@ -19,11 +15,10 @@ on enable-low-power
     write /proc/sys/kernel/sched_mostly_idle_load 30
     write /proc/sys/kernel/sched_mostly_idle_nr_run 3
 
-    write /sys/class/devfreq/qcom,cpubw.64/governor "bw_hwmon"
-    write /sys/class/devfreq/qcom,cpubw.64/bw_hwmon/io_percent 20
-    write /sys/class/devfreq/qcom,gpubw.61/governor "bw_hwmon"
-    write /sys/class/devfreq/qcom,gpubw.61/bw_hwmon/io_percent 40
-    write /sys/class/devfreq/qcom,mincpubw.65/governor "cpufreq"
+    write /sys/class/devfreq/cpubw/governor "bw_hwmon"
+    write /sys/class/devfreq/cpubw/bw_hwmon/io_percent 20
+    write /sys/class/devfreq/gpubw/bw_hwmon/io_percent 40
+    write /sys/class/devfreq/mincpubw/governor "cpufreq"
 
     # Disable thermal core_control to update interactive gov settings
     write /sys/module/msm_thermal/core_control/enabled 0
@@ -56,7 +51,7 @@ on enable-low-power
     write /sys/module/msm_thermal/core_control/enabled 1
 
     # Enable core control
-    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 2
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 0
     write /sys/devices/system/cpu/cpu0/core_ctl/max_cpus 4
     write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres 68
     write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres 40
