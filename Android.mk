@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(filter peach, $(TARGET_DEVICE)),)
+ifeq ($(filter peach a6000, $(TARGET_DEVICE)),)
 
 LOCAL_PATH := $(call my-dir)
 
