@@ -126,6 +126,9 @@ TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_cm
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(PLATFORM_PATH)
 
+# SELinux
+BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
+
 # Shims
 TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib64/libflp.so|libshims_flp.so \
