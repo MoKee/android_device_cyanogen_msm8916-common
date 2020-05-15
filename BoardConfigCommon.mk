@@ -129,9 +129,14 @@ TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_cm
 TARGET_RELEASETOOLS_EXTENSIONS := $(PLATFORM_PATH)
 
 # SELinux
+ifeq ($(TARGET_DEVICE),crackling)
 include device/qcom/sepolicy-legacy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
     $(PLATFORM_PATH)/sepolicy
+else
+BOARD_SEPOLICY_DIRS += \
+    $(PLATFORM_PATH)/sepolicy-permissive
+endif
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
